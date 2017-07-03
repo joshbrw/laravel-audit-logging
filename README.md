@@ -1,6 +1,6 @@
 # Laravel Audit Logging
 
-A simple, easy-to-use audit logging system with translation at the heart. Uses UUIDs for 
+A simple, easy-to-use audit logging system with translation at the heart. Uses UUIDs for easy dataset merging and management.
 
 ## Installation
 
@@ -31,12 +31,13 @@ This library ships with an `audit()` method, with the following syntax:
 ```php
     /**
      * Helper method for logging an audit entry.
-     * @param mixed $entity Auditable entry
-     * @param string $message The audit message
-     * @param array|null $data Any data to associate with this audit item
-     * @return mixed Audit log instance
+     * @param mixed $entity The entity to create the log for
+     * @param string $messageKey The key of the translatable message to use
+     * @param array|null $messageReplacements Array of replacements for the message
+     * @param array|null $data Any data to attribute to the audit log item
+     * @return AuditLog Audit log instance
      */
-    function audit($entity, string $message, array $data = null) {
+    function audit($entity, string $messageKey, array $messageReplacements = null, array $data = null): AuditLog {
 ```
 
 Which simply proxies through to the `Joshbrw\AuditLogging\AuditLogManager` service's `log()` method, which accepts the same parameters. 
