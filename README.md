@@ -7,7 +7,7 @@ A simple, easy-to-use audit logging system with translation at the heart. Uses U
 1. Add `Joshbrw\AuditLogging\AuditLoggingServiceProviders` under the `providers` key in `config/app.php`.
 2. Run `php artisan vendor:publish --provider=Joshbrw\AuditLogging\AuditLoggingServiceProvider` - this will publish the migration(s) to your top-level `database/migrations` directory.
 3. Run `php artisan migrate` to run the migration(s) provided with this package.
-4. On each of your entities that you wish to  
+4. On each of your Eloquent models that you wish to log, add the `Joshbrw\AuditLogging\Traits\Eloquent\Auditable` trait.
 
 ## Usage
 
