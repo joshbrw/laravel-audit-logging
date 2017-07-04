@@ -58,8 +58,8 @@ class EloquentAuditLogManager implements AuditLogManager
         $item->auditable_type = get_class($entity);
         $item->auditable_id = $entity->id;
         $item->message_key = $messageKey;
-        $item->message_replacements = $messageReplacements ? json_encode($messageReplacements) : null;
-        $item->data = $data ? json_encode($data) : null;
+        $item->message_replacements = $messageReplacements;
+        $item->data = $data;
 
         if ($user = $this->getUser()) {
             $item->user_id = $user->id;

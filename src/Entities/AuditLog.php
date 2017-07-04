@@ -24,6 +24,11 @@ class AuditLog extends Model
         'user_id',
     ];
 
+    protected $casts = [
+        'message_replacements' => 'array',
+        'data' => 'array',
+    ];
+
     /**
      * @return MorphTo
      */
