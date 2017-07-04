@@ -33,16 +33,16 @@ class AuditLog extends Model
     }
 
     /**
-     * Get the User that caused this Audit Log
-     * @return mixed
+     * Relationship for the User
+     * @return BelongsTo
      */
-    public function user()
+    public function user(): BelongsTo
     {
         if (!$userModel = config('audit-logging.userModel')) {
             throw new \RuntimeException("The userModel config key couldn't be found.");
         }
 
-        return $userModel::find($this->user_id);
+        return $this->belongsTo($userModel, 'user_id', 'id');
     }
 
     /**
