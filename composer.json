@@ -30,5 +30,12 @@
             "name": "Josh Brown",
             "email": "josh@joshbrown.me"
         }
-    ]
+    ],
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Joshbrw\\AuditLogging\\AuditLoggingServiceProvider"
+            ]
+        }
+    }
 }
