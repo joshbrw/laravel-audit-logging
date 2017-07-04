@@ -27,11 +27,6 @@ class AuditLoggingServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/Migrations');
-        $this->publishes([
-            __DIR__ . '/../config/audit-logging.php' => config_path('audit-logging.php')
-        ]);
-
         $this->app->singleton(AuditLogManager::class, EloquentAuditLogManager::class);
         $this->app->bind(AuditLogRepository::class, EloquentAuditLogRepository::class);
     }
@@ -41,8 +36,13 @@ class AuditLoggingServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $auditLogManager = $this->app->make(AuditLogManager::class);
+        $this->loadMigrationsFrom(__DIR__ . '/Migrations');
 
+        $this->publishes([
+            dirname(__DIR__) . '/config/audit-logging.php' => config_path('audit-logging.php')
+        ]);
+
+        $auditLogManager = $this->app->make(AuditLogManager::class);
         $this->handleUserResolverBinding($auditLogManager);
         $this->handleTranslationResolverBinding($auditLogManager);
     }
