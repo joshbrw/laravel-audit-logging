@@ -54,7 +54,7 @@ class AuditLoggingServiceProvider extends ServiceProvider
      */
     private function handleUserResolverBinding(AuditLogManager $auditLogManager): void
     {
-        if (class_exists('Cartalyst\Sentinel')) {
+        if ($this->app->bound('sentinel')) {
             $auditLogManager->setUserResolver($this->app->make(SentinelUserResolver::class));
             return;
         }
