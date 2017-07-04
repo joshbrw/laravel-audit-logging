@@ -33,6 +33,19 @@ class AuditLog extends Model
     }
 
     /**
+     * Get the User that caused this Audit Log
+     * @return mixed
+     */
+    public function user()
+    {
+        if (!$userModel = config('audit-logging.userModel')) {
+            throw new \RuntimeException("The userModel config key couldn't be found.");
+        }
+
+        return $userModel::find($this->user_id);
+    }
+
+    /**
      * Get the translated message for this Audit Log
      * @param null $lang
      * @return string
