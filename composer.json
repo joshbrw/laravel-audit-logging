@@ -35,7 +35,10 @@
         "laravel": {
             "providers": [
                 "Joshbrw\\AuditLogging\\AuditLoggingServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "Audit": "Joshbrw\\AuditLogging\\Facades\\Audit"
+            }
         }
     }
 }
