@@ -7,6 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use Joshbrw\AuditLogging\Contracts\TranslationResolver;
 use Joshbrw\AuditLogging\Services\AuditLogManager;
 use Joshbrw\AuditLogging\Services\Eloquent\EloquentAuditLogManager;
+use Joshbrw\AuditLogging\TranslationResolvers\LaravelTranslationResolver;
 use Joshbrw\AuditLogging\UserResolvers\LaravelUserResolver;
 use Joshbrw\AuditLogging\UserResolvers\SentinelUserResolver;
 
@@ -56,12 +57,12 @@ class AuditLoggingServiceProvider extends ServiceProvider
     }
 
     /**
-     * Binds the default Translation Resolver into the Audit Logger.
+     * Binds the default Laravel Translation Resolver into the Audit Logger.
      * @param AuditLogManager $auditLogManager
      */
     private function handleTranslationResolverBinding(AuditLogManager $auditLogManager): void
     {
-        $auditLogManager->setTranslationResolver($this->app->make(TranslationResolver::class));
+        $auditLogManager->setTranslationResolver($this->app->make(LaravelTranslationResolver::class));
     }
 
 }
