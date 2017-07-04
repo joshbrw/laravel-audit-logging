@@ -2,6 +2,7 @@
 
 
 use Joshbrw\AuditLogging\Entities\AuditLog;
+use Joshbrw\AuditLogging\Facades\Audit;
 use Joshbrw\AuditLogging\Services\AuditLogManager;
 
 if (!function_exists('audit')) {
@@ -14,6 +15,18 @@ if (!function_exists('audit')) {
      * @return AuditLog Audit log instance
      */
     function audit($entity, string $messageKey, array $messageReplacements = null, array $data = null): AuditLog {
-        return app(AuditLogManager::class)->log($entity, $messageKey, $messageReplacements, $data);
+        return Audit::log($entity, $messageKey, $messageReplacements, $data);
+    }
+}
+
+if (!function_exists('translate_audit')) {
+    /**
+     * Translate an Audit Log
+     * @param AuditLog $auditLog
+     * @param string|null $lang
+     * @return string
+     */
+    function translate_audit(AuditLog $auditLog, string $lang = null): string {
+        return Audit::translate($auditLog, $lang);
     }
 }
