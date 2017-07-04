@@ -5,6 +5,8 @@ namespace Joshbrw\AuditLogging;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Joshbrw\AuditLogging\Contracts\TranslationResolver;
+use Joshbrw\AuditLogging\Repositories\AuditLogRepository;
+use Joshbrw\AuditLogging\Repositories\Eloquent\EloquentAuditLogRepository;
 use Joshbrw\AuditLogging\Services\AuditLogManager;
 use Joshbrw\AuditLogging\Services\Eloquent\EloquentAuditLogManager;
 use Joshbrw\AuditLogging\TranslationResolvers\LaravelTranslationResolver;
@@ -28,6 +30,7 @@ class AuditLoggingServiceProvider extends ServiceProvider
         $this->loadMigrationsFrom(__DIR__ . '/Migrations');
 
         $this->app->singleton(AuditLogManager::class, EloquentAuditLogManager::class);
+        $this->app->bind(AuditLogRepository::class, EloquentAuditLogRepository::class);
     }
 
     /**
